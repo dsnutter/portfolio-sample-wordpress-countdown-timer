@@ -21,3 +21,11 @@ node_modules/
 *.log
 *.sql
 *.sqlite
+
+# ignore docker mysql folder
+data/
+
+# ignore default plugin related
+plugins/hello.php
+plugins/index.php
+plugins/askimet
