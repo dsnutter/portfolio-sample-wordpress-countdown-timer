@@ -28,4 +28,4 @@ data/
 # ignore default plugin related
 plugins/hello.php
 plugins/index.php
-plugins/askimet
+plugins/akismet
