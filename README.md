@@ -11,3 +11,9 @@ docker-compose up -d
 # to stop the containers specified by the YAML file
 docker-compose stop
 
+# for interactive shell
+docker exec -it dsn-wp bash
+
+# for custom wp-config.php file for enabling debugging, etc
+docker cp wp-config.php dsn-wp:/var/www/html/wp-config.php
+
