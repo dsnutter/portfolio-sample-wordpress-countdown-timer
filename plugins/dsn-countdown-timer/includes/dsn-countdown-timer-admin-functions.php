@@ -1,7 +1,6 @@
 <?php
 
 define( 'DSN_SECTION_NAME_SETTINGS', 'dsn_countdown_timer_settings' ); 
-define( 'DSN_TIMER_OPTIONS', 'dsn_countdown_timer_options' );
 
 add_action( 'admin_init', 'dsn_countdown_timer_register_settings' );
 add_action( 'admin_menu', 'add_countdown_timer_settings_admin_menu' );
@@ -10,7 +9,7 @@ function add_countdown_timer_settings_admin_menu() {
   $page = add_menu_page(  DSN_PLUGIN_NAME, 'Countdown Timer', 'administrator', DSN_PLUGIN_NAME, 'displayCountdownTimerAdminDashboard', '', 26 );
   // include the plugin admin settings flatpickr JS & CSS only on this plugin's setting page
   add_action('admin_print_scripts-' . $page, 'dsn_countdown_timer_admin_flatpickr');
-  add_action('in_admin_footer', 'dsn_countdown_timer_admin_flatpickr_call');
+  add_action('admin_print_footer_scripts-' . $page, 'dsn_countdown_timer_admin_flatpickr_call');
 }
 
 function displayCountdownTimerAdminDashboard() {
@@ -37,17 +36,16 @@ function dsn_countdown_timer_settings_section_display() {
 
 function dsn_countdown_timer_setting_target() {
   $optionsName = DSN_TIMER_OPTIONS;
-  $optionsVarName = 'target';
+  $optionsVarName = DSN_TIMER_ARMAGEDDON_DATE_VAR_NAME;
 
-  $options = get_option( $optionsName );
-  $value = esc_attr( $options[$optionsVarName] );
+  $value = get_armageddon_date();
 
   echo "<input id='dsn_countdown_timer_setting_target' 
               name='{$optionsName}[{$optionsVarName}]' 
               type='text' 
               value='{$value}' 
               placeholder='Select Target Date/Time...'
-              data-input
+              readonly
         />";
 }
 
@@ -69,7 +67,7 @@ function dsn_countdown_timer_admin_flatpickr_call() {
             minDate: new Date().fp_incr(1),
             maxDate: new Date().fp_incr(365),
             enableTime: true,
-            dateFormat: 'Y-m-d h:i K',
+            dateFormat: 'Y-m-d H:i',
       };
       const fp = flatpickr('#dsn_countdown_timer_setting_target', args);
     </script>

@@ -3,6 +3,9 @@ function parseDateToTimer(target) {
     const future = moment(target);
     let modDate;
 
+    if (future.diff(now, 'seconds') <= 0) {
+        return {};
+    }
     const days = future.diff(now, 'days');
     modDate = future.subtract(days, 'days');
 
@@ -23,10 +26,15 @@ function parseDateToTimer(target) {
 }
 
 function displayCountdownTimer() {
-    const targetDateTime = '2020-06-30 07:00';
+    const targetDateTime = document.getElementById('dsn-armageddon-target-date').value;
+
     const targetMillis = moment(targetDateTime); //moment.tz(targetDateTime, timezone);
     const result = parseDateToTimer(targetMillis);
 
+    if (result.days == undefined) {
+        document.getElementById('dsn-countdown-timer').textContent = 'has already passed';
+        return;
+    }
     const countdown = result.days + ' days ' + 
                       result.hours + ' hours ' +
                       result.minutes + ' minutes ' +
