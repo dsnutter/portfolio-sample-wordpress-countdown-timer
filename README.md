@@ -17,3 +17,6 @@ docker exec -it dsn-wp bash
 # for custom wp-config.php file for enabling debugging, etc
 docker cp wp-config.php dsn-wp:/var/www/html/wp-config.php
 
+![Frontend Display](https://dsnutter.github.io/assets/images/screenshots/Wordpress-Countdown-Timer-Frontend.png)
+
+![Administration Area Settings](https://dsnutter.github.io/assets/images/screenshots/Wordpress-Countdown-Timer-Plugin-Admin.png)
